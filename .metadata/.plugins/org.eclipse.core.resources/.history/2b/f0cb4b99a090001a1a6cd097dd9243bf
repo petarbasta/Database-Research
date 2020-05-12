@@ -1,0 +1,47 @@
+
+public class Queries {
+	static String[] readQueries = {
+			"SELECT DISTINCT vid, capacity \r\n" + 
+			"FROM venue \r\n" + 
+			"WHERE (area='B' OR area='C') AND capacity > 100 \r\n" + 
+			"ORDER by capacity DESC, vid;",
+			
+			"",
+			
+			"",
+		
+			"",
+			
+			"",
+			
+			"",
+			
+			"",
+			
+			"",
+			
+			"",
+			
+			"",
+			
+			"",
+			
+			"",
+			
+			"",
+			
+			"",
+			
+			"",
+			
+			"",
+			
+			"",
+			
+			"",
+			
+			"",
+			
+			
+	};
+}

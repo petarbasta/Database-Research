@@ -1,0 +1,10 @@
+comp-101             1
+comp-202             5
+comp-206             1
+comp-250             1
+comp-252             0
+comp-421             8
+comp-551             8
+ecse-321             6
+ecse-429             2
+math-240             8

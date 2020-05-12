@@ -1,0 +1,5 @@
+comp-202             3
+comp-421             3
+comp-551             4
+ecse-321             3
+math-240             3

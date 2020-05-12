@@ -1,0 +1,18 @@
+import java.sql.*;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+// REMEMBER TO CONNECT TO MCGILL VPN !!!
+public class Main {
+	static Statement statement;
+
+	public static void main(String[] args) throws SQLException {		
+		int numThreads = 50; 
+		
+        for (int i=0; i<numThreads; i++) 
+        { 
+            DatabaseAccess object = new DatabaseAccess(); 
+            object.start(); 
+        } 
+	}
+}
