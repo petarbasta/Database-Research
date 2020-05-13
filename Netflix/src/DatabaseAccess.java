@@ -1,12 +1,13 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseAccess extends Thread {
 	Statement statement;
 	
 	static int numRequests = 100;
 	
-	static int percentRead = 0;
-	static int percentInsert = 100;
+	static int percentRead = 100;
+	static int percentInsert = 0;
 	// percentUpdate is simply remaining amount
 
 	// Credentials
@@ -14,14 +15,14 @@ public class DatabaseAccess extends Thread {
 	static String password = "********";
 	
 	// JDBC URLs
-	static String urlPSQL = "jdbc:postgresql://192.168.0.107:5432/netflix";
-	static String urlMySQL = "jdbc:mysql://192.168.0.107:3306/netflix?allowPublicKeyRetrieval=true&useSSL=false";
-	static String urlMonetDB = "jdbc:monetdb://192.168.0.107:1337/netflix";
-	static String urlDB2 = "jdbc:db2://192.168.0.107:6969/netflix";
+	static String urlPSQL = "jdbc:postgresql://192.168.0.108:5432/netflix";
+	static String urlMySQL = "jdbc:mysql://192.168.0.108:3306/netflix?allowPublicKeyRetrieval=true&useSSL=false";
+	static String urlMonetDB = "jdbc:monetdb://192.168.0.108:1337/netflix";
+	static String urlDB2 = "jdbc:db2://192.168.0.108:6969/netflix";
 
 	public void run() {
 		try {
-			Connection con = DriverManager.getConnection(urlMonetDB, username, password);
+			Connection con = DriverManager.getConnection(urlPSQL, username, password);
 			statement = con.createStatement();
 
 			for (int i = 0; i < numRequests; i++) {
@@ -82,14 +83,34 @@ public class DatabaseAccess extends Thread {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	void getAvailableMedia() {
 		int accid = (int) ((Math.random() * 10) + 1);
 		
+		ArrayList<String> movies;
+
 		try {
 			// Create query
-			String querySQL = "SELECT title, releaseYear FROM AccountUser au, available_in avail, Media med\r\n"
+			String querySQL = "SELECT title FROM AccountUser au, available_in avail, Media med\r\n"
 					+ "WHERE au.accid=" + accid
 					+ " AND au.username=\'User\' AND avail.regname=au.regname AND med.mid=avail.mid;";
+			
+			movies = (ArrayList<String>) Main.cache.get(Integer.toString(querySQL.hashCode()));
+			
+			if (movies == null) {
+				movies = new ArrayList<String>();
+				java.sql.ResultSet rs = statement.executeQuery(querySQL);
+				while (rs.next()) {
+					movies.add(rs.getString(1));
+				}
+
+				Main.cache.set(Integer.toString(querySQL.hashCode()), 3600, movies);
+				System.out.println("Not found in cache.");
+				System.out.println(movies.toString());
+			} else {
+				System.out.println("Retrieved from cache.");
+				System.out.println(movies.toString());
+			}
 
 			// Execute query
 			statement.executeQuery(querySQL);
@@ -101,11 +122,28 @@ public class DatabaseAccess extends Thread {
 
 	void getNumEpisodes() {
 		int seasonNum = (int) ((Math.random() * 10) + 1);
+		int numEpisodes;
 
 		try {
 			// Create query
 			String querySQL = "SELECT COUNT(*) \r\n" + "FROM Episode e, Media m\r\n"
 					+ "WHERE e.mid=m.mid AND m.title=\'Pokemon\' AND e.seasonnum=" + seasonNum + ";";
+			
+			Object obj = Main.cache.get(Integer.toString(querySQL.hashCode()));
+			
+			if (obj == null) {
+				java.sql.ResultSet rs = statement.executeQuery(querySQL);
+				rs.next();
+				numEpisodes = rs.getInt(1);
+
+				Main.cache.set(Integer.toString(querySQL.hashCode()), 3600, numEpisodes);
+				System.out.println("Not found in cache.");
+				System.out.println(numEpisodes);
+			} else {
+				numEpisodes = (int) obj;
+				System.out.println("Retrieved from cache.");
+				System.out.println(numEpisodes);
+			}
 
 			// Execute query
 			statement.executeQuery(querySQL);
