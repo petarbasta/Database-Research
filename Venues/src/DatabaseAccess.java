@@ -14,11 +14,10 @@ public class DatabaseAccess extends Thread {
 	static String password = "*********";
 	
 	// JDBC URLs
-	static String urlPSQL = "jdbc:postgresql://192.168.2.55:5432/venues";
-	static String urlMySQL = "jdbc:mysql://192.168.2.55:3306/venues?allowPublicKeyRetrieval=true&useSSL=false";
-	static String urlMonetDB = "jdbc:monetdb://192.168.2.55:1337/venues";
-	static String urlDB2 = "jdbc:db2://192.168.2.55:6969/venues";
-
+	static String urlPSQL = "jdbc:postgresql://192.168.0.108:5432/venues";
+	static String urlMySQL = "jdbc:mysql://192.168.0.108:3306/venues?allowPublicKeyRetrieval=true&useSSL=false";
+	static String urlMonetDB = "jdbc:monetdb://192.168.0.108:1337/venues";
+	static String urlDB2 = "jdbc:db2://192.168.0.108:6969/venues";
 
 	public void run() {
 		try {

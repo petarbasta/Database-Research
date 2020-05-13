@@ -4,9 +4,9 @@ public class DatabaseAccess extends Thread {
 	int numThreads;
 	Statement statement;
 	
-	static int numRequests = 1;
+	static int numRequests = 100;
 	
-	static int percentRead = 100;
+	static int percentRead = 50;
 	static int percentInsert = 0;
 	// percentUpdate is simply remaining amount
 
@@ -15,10 +15,10 @@ public class DatabaseAccess extends Thread {
 	static String password = "********";
 	
 	// JDBC URLs
-	static String urlPSQL = "jdbc:postgresql://192.168.0.107:5432/mcgill";
-	static String urlMySQL = "jdbc:mysql://192.168.0.107:3306/mcgill?allowPublicKeyRetrieval=true&useSSL=false";
-	static String urlMonetDB = "jdbc:monetdb://192.168.0.107:1337/mcgill";
-	static String urlDB2 = "jdbc:db2://192.168.0.107:6969/mcgill";
+	static String urlPSQL = "jdbc:postgresql://192.168.0.108:5432/mcgill";
+	static String urlMySQL = "jdbc:mysql://192.168.0.108:3306/mcgill?allowPublicKeyRetrieval=true&useSSL=false";
+	static String urlMonetDB = "jdbc:monetdb://192.168.0.108:1337/mcgill";
+	static String urlDB2 = "jdbc:db2://192.168.0.108:6969/mcgill";
 
 	public DatabaseAccess(int numThreads) {
 		this.numThreads = numThreads;

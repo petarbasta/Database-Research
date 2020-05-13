@@ -15,10 +15,10 @@ public class DatabaseAccess extends Thread {
 	static String password = "********";
 	
 	// JDBC URLs
-	static String urlPSQL = "jdbc:postgresql://192.168.0.107:5432/netflix";
-	static String urlMySQL = "jdbc:mysql://192.168.0.107:3306/netflix?allowPublicKeyRetrieval=true&useSSL=false";
-	static String urlMonetDB = "jdbc:monetdb://192.168.0.107:1337/netflix";
-	static String urlDB2 = "jdbc:db2://192.168.0.107:6969/netflix";
+	static String urlPSQL = "jdbc:postgresql://192.168.0.108:5432/netflix";
+	static String urlMySQL = "jdbc:mysql://192.168.0.108:3306/netflix?allowPublicKeyRetrieval=true&useSSL=false";
+	static String urlMonetDB = "jdbc:monetdb://192.168.0.108:1337/netflix";
+	static String urlDB2 = "jdbc:db2://192.168.0.108:6969/netflix";
 	
 	public DatabaseAccess(int numThreads) {
 		this.numThreads = numThreads;
