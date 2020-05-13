@@ -1,6 +1,0 @@
-INDEX VERSION 1.131+C:\Users\Petar Basta\Documents\McGill\Research\.metadata\.plugins\org.eclipse.jdt.core
-3478762542.index
-3134279007.index
-119604799.index
-3636777313.index
-2459262041.index

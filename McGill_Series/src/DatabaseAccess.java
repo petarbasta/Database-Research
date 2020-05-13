@@ -4,7 +4,7 @@ public class DatabaseAccess extends Thread {
 	int numThreads;
 	Statement statement;
 	
-	static int numRequests = 100;
+	static int numRequests = 1;
 	
 	static int percentRead = 100;
 	static int percentInsert = 0;
